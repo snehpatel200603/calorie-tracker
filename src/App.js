@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import CalorieForm from "./components/CalorieForm";
+import CalorieList from "./components/CalorieList";
 
 function App() {
+  const [entries, setEntries] = useState([]);
+
+  const addEntry = (entry) => {
+    setEntries([...entries, { ...entry, id: Date.now() }]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h1>Calorie Tracker</h1>
       </header>
+      <CalorieForm onAddEntry={addEntry} />
+      <CalorieList entries={entries} />
     </div>
   );
 }
